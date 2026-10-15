@@ -55,7 +55,7 @@ class Stringssssss {
     };
 }
 
-public class Main {
+public class ArgumentGame {
     static final Random random = new Random();
     static final Stringssssss str = new Stringssssss();
 
@@ -77,7 +77,9 @@ public class Main {
 
   public static void main(String[] args) {
 
-    if (args[0].equals("game")) {
+    if ((args.length == 0) || ((args[0].equals("game") || args[0].equals("name")) == false)) {
+      System.out.println("To use, please provide a program argument: game | name (e.g. java ArgumentGame.java game)");
+    } else if (args[0].equals("game")) {
       int randomNumber = (int) (Math.random() * 101);
       Scanner scanner = new Scanner(System.in);
       boolean correct = false;
