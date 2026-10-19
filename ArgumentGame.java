@@ -63,7 +63,7 @@ public class ArgumentGame {
         System.out.println(str.correct[random.nextInt(str.correct.length)]);
     }
 
-    static void close() {
+    static void closer() {
         System.out.println(str.close[random.nextInt(str.close.length)]);
     }
 
@@ -90,7 +90,7 @@ public class ArgumentGame {
         attemptsCount++;
 
         if (guess == (randomNumber + 1) || guess == (randomNumber - 1)) {
-          close();
+          closer();
           continue;
         } else if (guess > randomNumber) {
           less();
@@ -100,12 +100,13 @@ public class ArgumentGame {
           continue;
         } else if (guess == randomNumber) {
           correct();
+          scanner.close();
           break;
         }
 
         correct = true;
       }
-      System.out.println("\nYou did it! Only took " + attemptsCount + " tries!");
+      System.out.println("\nOnly took " + attemptsCount + " tries!");
 
     } else if (args[0].equals("name")) {
       if (args.length == 2) {
@@ -114,5 +115,6 @@ public class ArgumentGame {
         System.out.println("You must provide a name silly!");
       }
     }
+
   }
 }
