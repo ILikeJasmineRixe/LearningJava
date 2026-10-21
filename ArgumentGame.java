@@ -1,9 +1,11 @@
+
 import java.util.Random;
 import java.util.Scanner;
 // new Random();
 
 class Stringssssss {
-  public String[] close = {
+
+    public String[] close = {
         "So close!",
         "Dawg you\'re like right there.",
         "hes right next to me isnt he...",
@@ -16,7 +18,7 @@ class Stringssssss {
         "ok. figure it out from here",
         "hot"
     };
-    
+
     public String[] less = {
         "Yeah thats way too high gng",
         "nope, the number is less than that",
@@ -56,6 +58,7 @@ class Stringssssss {
 }
 
 public class ArgumentGame {
+
     static final Random random = new Random();
     static final Stringssssss str = new Stringssssss();
 
@@ -75,46 +78,54 @@ public class ArgumentGame {
         System.out.println(str.more[random.nextInt(str.more.length)]);
     }
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    if ((args.length == 0) || ((args[0].equals("game") || args[0].equals("name")) == false)) {
-      System.out.println("To use, please provide a program argument: game | name (e.g. java ArgumentGame.java game)");
-    } else if (args[0].equals("game")) {
-      int randomNumber = (int) (Math.random() * 101);
-      Scanner scanner = new Scanner(System.in);
-      boolean correct = false;
-      int attemptsCount = 0;
-      while (correct == false) {
-        System.out.print("\nGuess? ");
-        int guess = scanner.nextInt();
-        attemptsCount++;
+        if ((args.length == 0) || ((args[0].equals("game") || args[0].equals("name")) == false)) {
+            System.out.println("To use, please provide a program argument: game | name (e.g. java ArgumentGame.java game)");
+        } else if (args[0].equals("game")) {
+            int randomNumber = (int) (Math.random() * 101);
+            Scanner scanner = new Scanner(System.in);
 
-        if (guess == (randomNumber + 1) || guess == (randomNumber - 1)) {
-          closer();
-          continue;
-        } else if (guess > randomNumber) {
-          less();
-          continue;
-        } else if (guess < randomNumber) {
-          more();
-          continue;
-        } else if (guess == randomNumber) {
-          correct();
-          scanner.close();
-          break;
+            boolean correct = false;
+            int attemptsCount = 0;
+            while (correct == false) {
+                System.out.print("\nGuess? ");
+                int guess;
+
+                try {
+                    guess = (int) scanner.nextDouble();
+                    attemptsCount++;
+
+                    if (guess == (randomNumber + 1) || guess == (randomNumber - 1)) {
+                        closer();
+                        continue;
+                    } else if (guess > randomNumber) {
+                        less();
+                        continue;
+                    } else if (guess < randomNumber) {
+                        more();
+                        continue;
+                    } else if (guess == randomNumber) {
+                        correct();
+                        scanner.close();
+                        break;
+                    }
+
+                    correct = true;
+                } catch (java.util.InputMismatchException e) {
+                  System.out.println("It needs to be a number, dumbass.");
+                  scanner.nextLine();
+                }
+            }
+            System.out.println("\nOnly took " + attemptsCount + " tries!");
+
+        } else if (args[0].equals("name")) {
+            if (args.length == 2) {
+                System.out.println("Hello, " + args[1] + "!");
+            } else {
+                System.out.println("You must provide a name silly!");
+            }
         }
 
-        correct = true;
-      }
-      System.out.println("\nOnly took " + attemptsCount + " tries!");
-
-    } else if (args[0].equals("name")) {
-      if (args.length == 2) {
-        System.out.println("Hello, " + args[1] + "!");
-      } else {
-        System.out.println("You must provide a name silly!");
-      }
     }
-
-  }
 }
