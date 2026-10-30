@@ -1,7 +1,5 @@
-
 import java.util.Random;
 import java.util.Scanner;
-// new Random();
 
 class Stringssssss {
 
@@ -38,7 +36,7 @@ class Stringssssss {
         "are you using a different measurement or something? whats with this short ass number you just gave me",
         "too low pal",
         "stop atp, youre too low",
-        "i was gonna say cold but maybe youre really close... just... less than the number",
+        "i was gonna say cold but maybe youre just giving too low. who knows!",
         "you need to go UP UP AND AWAY",
         "dumbass over here thinks the number is that small?"
     };
@@ -88,7 +86,7 @@ public class ArgumentGame {
 
             boolean correct = false;
             int attemptsCount = 0;
-            while (correct == false) {
+            while (!correct) {
                 System.out.print("\nGuess? ");
                 int guess;
 

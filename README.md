@@ -8,4 +8,7 @@
     - `game`: Simple number guessing game with random strings depending on how close you are
     - `name`: it says Hello + your name, thats all.
 
-
+- HeadsOrTails:
+    - Usage: `java HeadsOrTails.java`
+    - Calculates percentages for heads & tails flipping
+    - Really badly optimized
