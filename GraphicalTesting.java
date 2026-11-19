@@ -5,7 +5,6 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.GraphicsEnvironment;
 
 public class GraphicalTesting extends Frame{
     // example taken from: https://www.geeksforgeeks.org/java/what-is-java-awt-graphics/
@@ -35,7 +34,7 @@ public class GraphicalTesting extends Frame{
     public static void main(String[] args)
     {
         // DEBUG: 
-        System.out.println(GraphicsEnvironment.isHeadless());
+        // System.out.println(GraphicsEnvironment.isHeadless());
 
         /* Main shi:
         GraphicalTesting frame = new GraphicalTesting();
