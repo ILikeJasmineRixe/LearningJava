@@ -23,13 +23,11 @@ public class HashingTest {
         }
         return MessageDigest.isEqual(expected, actual);
     }
-    // hashes.get(key)
 
     static String getHash(String email, String password) throws Exception {
         int i;
         for (i = 0; i < email.length(); i++) {
             if (email.charAt(i) == '@') {
-                // System.out.println(email);
                 break;
 
             }
@@ -59,7 +57,7 @@ public class HashingTest {
             boolean exit = false;
             String selectedHash;
             
-            while (!exit) {
+            do {
                 System.out.print("\nWould you like to create an account? (C) or Login to an account? (L) or Exit (E)\t");
                 selection = input.next().charAt(0);
                 
@@ -74,11 +72,12 @@ public class HashingTest {
                     String message = input.next();
                     
                     hashes.put(getHash(temp[0], temp[1]), message);
-                    
+                    /*
                     System.out.println("\n");
                     System.out.println(hashes);
                     System.out.println(getHash(temp[0], temp[1]));
                     System.out.println(hashes.get(getHash(temp[0], temp[1])));
+                    */
                     
                     // System.out.println("Created");
                 } else if ((selection == 'l') || (selection == 'L')) {
@@ -103,10 +102,14 @@ public class HashingTest {
                         }
                     }
                     byte[] salt = login[0].substring(0, i).getBytes(StandardCharsets.UTF_8);
-                    selectedHash = getHash(login[0], login[1]);
-                    if (verify(salt, login[1].toCharArray(), selectedHash)) {
-                        System.out.println("Login Success!");
-                        System.out.println("Here\'s your stored message: " + hashes.get(selectedHash));
+                    if (hashes.containsKey(getHash(login[0], login[1]))) {
+                        selectedHash = getHash(login[0], login[1]);
+                        if (verify(salt, login[1].toCharArray(), selectedHash)) {
+                            System.out.println("Login Success!");
+                            System.out.println("Here\'s your stored message: " + hashes.get(selectedHash));
+                        }
+                    } else {
+                        System.out.println("Login unsuccessful. Please try again");
                     }
                     
                     // System.out.println("Logged");
@@ -115,7 +118,7 @@ public class HashingTest {
                 } else {
                     System.out.println("Please select a valid option");
                 }
-            }
+            } while (!exit);
         }
     }
 }
