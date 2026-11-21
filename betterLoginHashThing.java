@@ -106,7 +106,7 @@ public class betterLoginHashThing {
                     // this lwk just makes sure theyre account exists
                     if (accounts.containsKey(loginTemp[0])) {
                         
-                        // accounts.getValue(loginTemp[0]);
+                        accounts.get(loginTemp[0]).salty();
                         // The method getValue(String) is undefined for the type HashMap<String,betterLoginHashThing.Account>
                         /* 
                             ok the issue here is we have to access this object, but it was initialized inside a hashmap,
