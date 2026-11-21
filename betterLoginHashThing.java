@@ -31,7 +31,7 @@ public class betterLoginHashThing {
         public String lookup(String email) {
             return hash;
         }
-         */
+        
         public void oooWhatchuSayyyyyy(byte[] lookupHash) {
             if (Arrays.equals(lookupHash, hash)) {
                 System.out.println(message);
@@ -39,6 +39,7 @@ public class betterLoginHashThing {
                 System.out.println("Invalid credentials, please try again later.");
             }
         }
+            */
     }
 
     // @SuppressWarnings("unlikely-arg-type")
@@ -47,7 +48,11 @@ public class betterLoginHashThing {
 
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         byte[] loginHash = f.generateSecret(spec).getEncoded();
-        accounts.get(email).oooWhatchuSayyyyyy(loginHash);
+        if (Arrays.equals(accounts.get(email).hash, loginHash)) {
+                System.out.println(accounts.get(email).message);
+            } else {
+                System.out.println("Invalid credentials, please try again later.");
+            }
     }
 
     static void createAccount(String email, String password, String message) throws Exception {
@@ -78,22 +83,27 @@ public class betterLoginHashThing {
 
             do {
                 System.out.println("\nWhat action would you like to perform?\n\t- (L) Login\n\t- (C) Create an account\n\t- (E) Exit");
-                selection = input.next().charAt(0);
+                selection = input.nextLine().charAt(0);
                 if ((selection == 'C') || (selection == 'c')) {
                     System.out.print("\nWelcome to the account creation interface. Please provide the following information to create your account:\n\t- Email Address: ");
-                    createTemp[0] = input.next();
+                    createTemp[0] = input.nextLine();
 
-                    System.out.print("\t- Password: ");
-                    createTemp[1] = input.next();
+                    if (accounts.containsKey(createTemp[0])) {
+                        System.out.println("That Email is already registered, please try again later.");
+                    } else {
+                        System.out.print("\t- Password: ");
+                        createTemp[1] = input.nextLine();
 
-                    System.out.print("\t- Your Secret Message (shush!): ");
-                    createTemp[2] = input.next();
+                        System.out.print("\t- Your Secret Message (shush!) (for buggy reasons make it one word only please): ");
+                        createTemp[2] = input.nextLine();
+                        // TODO: fix this fucking line that sucks and is terrible
 
-                    createAccount(
-                            createTemp[0],
-                            createTemp[1],
-                            createTemp[2]
-                    );
+                        createAccount(
+                                createTemp[0],
+                                createTemp[1],
+                                createTemp[2]
+                        );
+                    }
 
                     // DEBUG:
                     // System.out.println(accounts.get(createTemp[0]));
@@ -101,21 +111,14 @@ public class betterLoginHashThing {
                 } else if ((selection == 'L') || (selection == 'l')) {
 
                     System.out.print("\nWelcome! Please provide the flolowing information to access your account:\n\t- Email Address: ");
-                    loginTemp[0] = input.next();
+                    loginTemp[0] = input.nextLine();
 
                     System.out.print("\t- Password: ");
-                    loginTemp[1] = input.next();
+                    loginTemp[1] = input.nextLine();
 
                     // this lwk just makes sure theyre account exists
                     if (accounts.containsKey(loginTemp[0])) {
 
-                        /*
-                        if (checkValidity(loginTemp[0], loginTemp[1], accounts.get(loginTemp[0]).salt)) {
-                            System.out.println(accounts.get(loginTemp[0]).message);
-                        } else {
-                            System.out.println("Invalid credentials, please try again later");
-                        }
-                        */
                         login(loginTemp[0], loginTemp[1], accounts.get(loginTemp[0]).salt);
 
                         // The method getValue(String) is undefined for the type HashMap<String,betterLoginHashThing.Account>
@@ -129,6 +132,5 @@ public class betterLoginHashThing {
 
             } while (!exit);
         }
-
     }
 }
